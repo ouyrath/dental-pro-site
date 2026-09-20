@@ -1,8 +1,8 @@
 import './globals.css'
 
 export const metadata = {
-  title: 'Smile Haven Dental | Modern Family Dentistry',
-  description: 'Modern, comfortable dental care for the whole family. Book online, explore services, and learn about flexible payment options.'
+  title: 'Emily | Modern Family Dentistry',
+  description: 'Modern, comfortable dental care from Emily Yanna. Explore services, payment options and appointment information.'
 }
 
 export default function RootLayout({ children }) {

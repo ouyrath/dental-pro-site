@@ -17,6 +17,7 @@ import {
   Clock3
 } from 'lucide-react'
 import { useState } from 'react'
+import Image from 'next/image'
 
 const services = [
   { title: 'General Dentistry', text: 'Cleanings, exams, fillings and preventive care for healthy smiles.', icon: ShieldCheck },
@@ -47,7 +48,7 @@ export default function Home() {
         <div className="container topbar-inner">
           <span>Modern family dentistry • Friendly, comfortable care</span>
           <div className="top-links">
-            <a href="tel:+12815550123"><Phone size={15}/> (281) 555-0123</a>
+            <a href="tel:12345678"><Phone size={15}/> 12345678</a>
             <a href="#financing"><CreditCard size={15}/> Financing</a>
           </div>
         </div>
@@ -55,9 +56,9 @@ export default function Home() {
 
       <header className="nav-wrap">
         <div className="container nav">
-          <a className="brand" href="#top" aria-label="Smile Haven Dental home">
+          <a className="brand" href="#top" aria-label="Emily Dental home">
             <span className="brand-mark">S</span>
-            <span><strong>Smile Haven</strong><small>DENTAL</small></span>
+            <span><strong>Emily</strong><small>DENTAL</small></span>
           </a>
           <nav className="desktop-nav">
             <a href="#about">About</a>
@@ -93,7 +94,7 @@ export default function Home() {
             <p>Comfortable, modern dentistry built around real conversations, thoughtful care and a healthier smile for every stage of life.</p>
             <div className="hero-actions">
               <a className="btn btn-primary btn-large" href="#contact"><CalendarDays size={19}/> Book an Appointment</a>
-              <a className="btn btn-ghost btn-large" href="tel:+12815550123"><Phone size={19}/> Call Us</a>
+              <a className="btn btn-ghost btn-large" href="tel:12345678"><Phone size={19}/> Call Us</a>
             </div>
             <div className="trust-row">
               <span><CheckCircle2/> Same-day emergencies</span>
@@ -103,9 +104,16 @@ export default function Home() {
           </div>
 
           <div className="hero-card">
-            <div className="photo-placeholder dentist-photo" aria-label="Dentist portrait placeholder">
-              <div className="portrait-circle"><Smile size={76}/></div>
-              <div className="photo-note">Replace with your dentist photo</div>
+            <div className="photo-placeholder dentist-photo">
+              <Image
+                src="/emily-dentist.webp"
+                alt="Dentist portrait"
+                fill
+                priority
+                sizes="(max-width: 900px) 100vw, 45vw"
+                className="dentist-image"
+              />
+              <div className="photo-note">Emily Yanna</div>
             </div>
             <div className="floating-card">
               <div className="stars">★★★★★</div>
@@ -124,7 +132,7 @@ export default function Home() {
             <h2>A modern dental home built around you.</h2>
           </div>
           <div className="intro-copy">
-            <p>We believe excellent dentistry starts with listening. Our team takes time to understand what matters to you, explain your options clearly and create a plan that fits your goals.</p>
+            <p>At Emily, dentist Emily Yanna focuses on clear conversations, comfortable care and treatment plans built around each patient's needs and goals.</p>
             <a className="text-link" href="#contact">Meet the team <ArrowRight size={17}/></a>
           </div>
         </div>
@@ -228,15 +236,15 @@ export default function Home() {
             <h2>Ready for a better dental experience?</h2>
             <p>Use the details below as placeholders. Replace them with your real practice information before publishing.</p>
             <div className="contact-list">
-              <a href="tel:+12815550123"><Phone/><span><small>Call</small>(281) 555-0123</span></a>
-              <div><MapPin/><span><small>Visit</small>1234 Your Street, Missouri City, TX</span></div>
+              <a href="tel:12345678"><Phone/><span><small>Call</small>12345678</span></a>
+              <div><MapPin/><span><small>Visit</small>123 Main St, Texas 123456</span></div>
               <div><Clock3/><span><small>Hours</small>Mon–Fri 9 AM–6 PM • Sat 8 AM–2 PM</span></div>
             </div>
           </div>
           <form className="contact-form" onSubmit={(e)=>{e.preventDefault(); alert('Demo form submitted. Connect this to your email or booking system before launch.')}}>
             <h3>Request an appointment</h3>
             <label>Full name<input required name="name" placeholder="Your name" /></label>
-            <label>Phone<input required name="phone" placeholder="(281) 555-0123" /></label>
+            <label>Phone<input required name="phone" placeholder="12345678" /></label>
             <label>Email<input required type="email" name="email" placeholder="you@example.com" /></label>
             <label>How can we help?<textarea name="message" rows="4" placeholder="Cleaning, tooth pain, implants, cosmetic care..." /></label>
             <button className="btn btn-primary btn-large" type="submit">Request Appointment <ArrowRight size={18}/></button>
@@ -247,11 +255,11 @@ export default function Home() {
 
       <footer>
         <div className="container footer-grid">
-          <div className="brand footer-brand"><span className="brand-mark">S</span><span><strong>Smile Haven</strong><small>DENTAL</small></span></div>
+          <div className="brand footer-brand"><span className="brand-mark">S</span><span><strong>Emily</strong><small>DENTAL</small></span></div>
           <p>Modern dentistry with a neighborly feel.</p>
           <div className="footer-links"><a href="#services">Services</a><a href="#reviews">Reviews</a><a href="#contact">Contact</a></div>
         </div>
-        <div className="container footer-bottom">© 2026 Smile Haven Dental. Demo website template.</div>
+        <div className="container footer-bottom">© 2026 Emily. All rights reserved.</div>
       </footer>
     </main>
   )
