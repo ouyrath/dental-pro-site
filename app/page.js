@@ -57,7 +57,7 @@ export default function Home() {
       <header className="nav-wrap">
         <div className="container nav">
           <a className="brand" href="#top" aria-label="Emily Dental home">
-            <span className="brand-mark">S</span>
+            <span className="brand-mark">E</span>
             <span><strong>Emily</strong><small>DENTAL</small></span>
           </a>
           <nav className="desktop-nav">
@@ -138,6 +138,31 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="section doctor-section" id="doctor">
+        <div className="container doctor-grid">
+          <div className="doctor-photo-wrap">
+            <Image
+              src="/emily-dentist.webp"
+              alt="Emily Yanna"
+              fill
+              sizes="(max-width: 900px) 100vw, 44vw"
+              className="doctor-photo"
+            />
+          </div>
+          <div className="doctor-copy">
+            <div className="eyebrow">Meet your dentist</div>
+            <h2>Meet Emily Yanna</h2>
+            <p>Emily Yanna welcomes patients with a calm, friendly approach and a focus on clear communication. Every visit is designed to feel comfortable, understandable and centered on the patient.</p>
+            <div className="doctor-points">
+              <span><CheckCircle2/> Clear treatment explanations</span>
+              <span><CheckCircle2/> Comfortable, patient-first visits</span>
+              <span><CheckCircle2/> Care for the whole family</span>
+            </div>
+            <a className="btn btn-primary" href="#contact"><CalendarDays size={18}/> Request an Appointment</a>
+          </div>
+        </div>
+      </section>
+
       <section className="section services" id="services">
         <div className="container">
           <div className="section-heading centered">
@@ -155,6 +180,16 @@ export default function Home() {
               </article>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="emergency-strip">
+        <div className="container emergency-inner">
+          <div>
+            <strong>Dental emergency?</strong>
+            <span>Call Emily for help with tooth pain, broken teeth and urgent concerns.</span>
+          </div>
+          <a className="btn btn-light" href="tel:12345678"><Phone size={18}/> Call 12345678</a>
         </div>
       </section>
 
@@ -229,12 +264,40 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="section faq" id="faq">
+        <div className="container faq-grid">
+          <div className="section-heading">
+            <div className="eyebrow">Common questions</div>
+            <h2>Frequently asked questions</h2>
+            <p>Quick answers to help patients know what to expect before visiting Emily.</p>
+          </div>
+          <div className="faq-list">
+            <details>
+              <summary>Do you see new patients?</summary>
+              <p>Yes. New patients can call or use the appointment request form below.</p>
+            </details>
+            <details>
+              <summary>Do you offer emergency dental visits?</summary>
+              <p>Yes. Call 12345678 for urgent dental concerns and availability.</p>
+            </details>
+            <details>
+              <summary>What services are available?</summary>
+              <p>The site currently highlights general dentistry, implants, cosmetic dentistry and emergency care.</p>
+            </details>
+            <details>
+              <summary>Where is Emily located?</summary>
+              <p>123 Main St, Texas 123456.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
       <section className="section contact" id="contact">
         <div className="container contact-grid">
           <div className="contact-copy">
             <div className="eyebrow light">Start your dental journey</div>
             <h2>Ready for a better dental experience?</h2>
-            <p>Use the details below as placeholders. Replace them with your real practice information before publishing.</p>
+            <p>Call or visit Emily to ask about appointments, services and availability.</p>
             <div className="contact-list">
               <a href="tel:12345678"><Phone/><span><small>Call</small>12345678</span></a>
               <div><MapPin/><span><small>Visit</small>123 Main St, Texas 123456</span></div>
@@ -255,7 +318,7 @@ export default function Home() {
 
       <footer>
         <div className="container footer-grid">
-          <div className="brand footer-brand"><span className="brand-mark">S</span><span><strong>Emily</strong><small>DENTAL</small></span></div>
+          <div className="brand footer-brand"><span className="brand-mark">E</span><span><strong>Emily</strong><small>DENTAL</small></span></div>
           <p>Modern dentistry with a neighborly feel.</p>
           <div className="footer-links"><a href="#services">Services</a><a href="#reviews">Reviews</a><a href="#contact">Contact</a></div>
         </div>
