@@ -14,7 +14,9 @@ import {
   ArrowRight,
   CheckCircle2,
   CreditCard,
-  Clock3
+  Clock3,
+  Share2,
+  MessageCircle
 } from 'lucide-react'
 import { useState } from 'react'
 import Image from 'next/image'
@@ -33,14 +35,38 @@ const values = [
   { title: 'Family Focused', text: 'Thoughtful care for children, adults and every stage in between.', icon: ShieldCheck },
 ]
 
-const reviews = [
-  'The team was welcoming, professional and made the entire appointment easy from start to finish.',
-  'Beautiful modern office. Everything was explained clearly and I never felt rushed.',
-  'They helped me with a same-day dental concern and made me feel comfortable right away.'
-]
-
 export default function Home() {
   const [open, setOpen] = useState(false)
+
+  const shareSite = async () => {
+    const shareData = {
+      title: 'Emily Dental',
+      text: 'Visit Emily Dental',
+      url: window.location.href
+    }
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData)
+      } else {
+        await navigator.clipboard.writeText(window.location.href)
+        alert('Website link copied.')
+      }
+    } catch {}
+  }
+
+  const requestAppointment = (e) => {
+    e.preventDefault()
+    const data = new FormData(e.currentTarget)
+    const message = [
+      'Appointment request for Emily Dental',
+      `Name: ${data.get('name')}`,
+      `Phone: ${data.get('phone')}`,
+      `Preferred date: ${data.get('date') || 'Flexible'}`,
+      `Preferred time: ${data.get('time') || 'Flexible'}`,
+      `Patient: ${data.get('patientType') || 'Not specified'}`
+    ].join('\n')
+    window.location.href = `sms:12345678?body=${encodeURIComponent(message)}`
+  }
 
   return (
     <main>
@@ -63,7 +89,7 @@ export default function Home() {
           <nav className="desktop-nav">
             <a href="#about">About</a>
             <a href="#services">Services</a>
-            <a href="#reviews">Reviews</a>
+            <a href="#faq">FAQ</a>
             <a href="#membership">Membership</a>
             <a href="#contact">Contact</a>
           </nav>
@@ -76,7 +102,7 @@ export default function Home() {
           <div className="mobile-nav container">
             <a onClick={()=>setOpen(false)} href="#about">About</a>
             <a onClick={()=>setOpen(false)} href="#services">Services</a>
-            <a onClick={()=>setOpen(false)} href="#reviews">Reviews</a>
+            <a onClick={()=>setOpen(false)} href="#faq">FAQ</a>
             <a onClick={()=>setOpen(false)} href="#membership">Membership</a>
             <a onClick={()=>setOpen(false)} href="#contact">Contact</a>
             <a onClick={()=>setOpen(false)} className="btn btn-primary" href="#contact">Book Online</a>
@@ -95,6 +121,7 @@ export default function Home() {
             <div className="hero-actions">
               <a className="btn btn-primary btn-large" href="#contact"><CalendarDays size={19}/> Book an Appointment</a>
               <a className="btn btn-ghost btn-large" href="tel:12345678"><Phone size={19}/> Call Us</a>
+              <button className="btn btn-ghost btn-large" type="button" onClick={shareSite}><Share2 size={19}/> Share</button>
             </div>
             <div className="trust-row">
               <span><CheckCircle2/> Same-day emergencies</span>
@@ -211,24 +238,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section reviews" id="reviews">
-        <div className="container">
-          <div className="section-heading centered">
-            <div className="eyebrow">Patient stories</div>
-            <h2>See what our patients have to say.</h2>
-          </div>
-          <div className="review-grid">
-            {reviews.map((review, i) => (
-              <article className="review-card" key={review}>
-                <div className="stars">★★★★★</div>
-                <p>“{review}”</p>
-                <div className="reviewer"><span>{['JM','AR','KT'][i]}</span><div><strong>{['Jamie M.','Alex R.','Kim T.'][i]}</strong><small>Verified patient</small></div></div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="section finance" id="financing">
         <div className="container finance-grid">
           <div>
@@ -304,14 +313,31 @@ export default function Home() {
               <div><Clock3/><span><small>Hours</small>Mon–Fri 9 AM–6 PM • Sat 8 AM–2 PM</span></div>
             </div>
           </div>
-          <form className="contact-form" onSubmit={(e)=>{e.preventDefault(); alert('Demo form submitted. Connect this to your email or booking system before launch.')}}>
+          <form className="contact-form" onSubmit={requestAppointment}>
             <h3>Request an appointment</h3>
+            <p className="form-intro">Fill this out and your phone will open a text message to Emily. You review it before sending.</p>
             <label>Full name<input required name="name" placeholder="Your name" /></label>
             <label>Phone<input required name="phone" placeholder="12345678" /></label>
-            <label>Email<input required type="email" name="email" placeholder="you@example.com" /></label>
-            <label>How can we help?<textarea name="message" rows="4" placeholder="Cleaning, tooth pain, implants, cosmetic care..." /></label>
-            <button className="btn btn-primary btn-large" type="submit">Request Appointment <ArrowRight size={18}/></button>
-            <small>Demo form — no patient information is stored or sent.</small>
+            <div className="form-row">
+              <label>Preferred date<input type="date" name="date" /></label>
+              <label>Preferred time
+                <select name="time" defaultValue="">
+                  <option value="">Flexible</option>
+                  <option>Morning</option>
+                  <option>Afternoon</option>
+                  <option>Evening</option>
+                </select>
+              </label>
+            </div>
+            <label>Patient type
+              <select name="patientType" defaultValue="">
+                <option value="">Select one</option>
+                <option>New patient</option>
+                <option>Existing patient</option>
+              </select>
+            </label>
+            <button className="btn btn-primary btn-large" type="submit"><MessageCircle size={18}/> Text Appointment Request</button>
+            <small>Please do not include medical details in the text request. Call the office for urgent or private concerns.</small>
           </form>
         </div>
       </section>
@@ -320,7 +346,7 @@ export default function Home() {
         <div className="container footer-grid">
           <div className="brand footer-brand"><span className="brand-mark">E</span><span><strong>Emily</strong><small>DENTAL</small></span></div>
           <p>Modern dentistry with a neighborly feel.</p>
-          <div className="footer-links"><a href="#services">Services</a><a href="#reviews">Reviews</a><a href="#contact">Contact</a></div>
+          <div className="footer-links"><a href="#services">Services</a><a href="#faq">FAQ</a><button className="footer-share" type="button" onClick={shareSite}>Share</button><a href="#contact">Contact</a></div>
         </div>
         <div className="container footer-bottom">© 2026 Emily. All rights reserved.</div>
       </footer>
